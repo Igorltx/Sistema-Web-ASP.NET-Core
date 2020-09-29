@@ -40,14 +40,14 @@ namespace SalesWebMvc.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<double>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    SellerID = table.Column<int>(nullable: true)
+                    SellerId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesRecords", x => x.ID);
                     table.ForeignKey(
                         name: "FK_SalesRecords_Seller_SellerID",
-                        column: x => x.SellerID,
+                        column: x => x.SellerId,
                         principalTable: "Seller",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
