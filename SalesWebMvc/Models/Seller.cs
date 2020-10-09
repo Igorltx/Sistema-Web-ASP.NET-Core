@@ -8,13 +8,26 @@ namespace SalesWebMvc.Models
     public class Seller
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage ="{0} required")] //Para campo obrigatório usa-se o Required.
+        //[StringLength(60,MinimumLength =3,ErrorMessage ="Name size should be between 3 and 60")] forma melhor abaixo. Apenas para entender.
+        [StringLength(60,MinimumLength =3,ErrorMessage ="{0} size should be between {2} and {1}")]
         public string Name { get; set; }
-        [DataType(DataType.EmailAddress)] //o email, antes texto, inicia um link de email.
+
+        [Required(ErrorMessage = "{0} required")]
+        [EmailAddress(ErrorMessage = "Enter a valid email")]
+        [DataType(DataType.EmailAddress)] //o email, antes texto, inicia um link de email.        
         public string Email { get; set; }
+
         [Display(Name = "Birth Date")] //visualização na página
+
+        [Required(ErrorMessage = "{0} required")]
         [DataType(DataType.Date)] //tipo de formato de data no campo, neste caso MM/dd/yyyy
-        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]        
         public DateTime BirthDate { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
+        [Range(100.0, 50000.0, ErrorMessage = "{0} must be from {1} to {2}")]
         [Display(Name = "Base Salary")]
         [DisplayFormat(DataFormatString ="{0:F2}")]
         public double BaseSalary { get; set; }
