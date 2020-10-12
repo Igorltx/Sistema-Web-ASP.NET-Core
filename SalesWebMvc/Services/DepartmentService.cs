@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebMvc.Services
 {
@@ -14,9 +15,11 @@ namespace SalesWebMvc.Services
         {
             _context = context;
         }
-        public List<Department> FindAll()
+        public async Task<List<Department>> FindAllAsync() //método sincrono, mais lento, para acesso a BD, HD e etc: public List<Department> FindAll().
         {
-            return _context.Department.OrderBy(x => x.Name).ToList();
+            // modificado. return _context.Department.OrderBy(x => x.Name).ToList();
+            // o ToList é um método síncrono. Para assíncrono, ToListAsync e acréscimo do await para definir assíncrono conforme abaixo.
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }
